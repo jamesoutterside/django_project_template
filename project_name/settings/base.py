@@ -4,11 +4,8 @@ from sys import path
 from django.core.exceptions import ImproperlyConfigured
 
 def get_env_variable(var_name):
-    try:
-        return os.environ(var_name)
-    except KeyError:
-        raise ImproperlyConfigured("Must set %s evn var" % var_name)
-
+    return environ.get(var_name)
+    
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 SITE_ROOT = dirname(DJANGO_ROOT)
 SITE_NAME = basename(DJANGO_ROOT)
@@ -33,9 +30,9 @@ USE_L10N = True
 USE_TZ = True
 
 MEDIA_ROOT = normpath(join(SITE_ROOT, 'media'))
-MEDIA_URL = ''
+MEDIA_URL = '/uploads/'
 
-STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
+STATIC_ROOT = normpath(join(SITE_ROOT, 'static'))
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     normpath(join(SITE_ROOT, 'static')),
